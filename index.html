@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Wanwu Live SDK Demo</title>
+</head>
+<body>
+  <h1>玩物视频直播 SDK Demo</h1>
+
+  <div>
+    <input id="room" placeholder="Room ID">
+    <input id="user" placeholder="Username">
+    <button onclick="join()">Join Room</button>
+    <button onclick="leave()">Leave</button>
+  </div>
+
+  <br>
+
+  <div>
+    <input id="msg" placeholder="Message">
+    <button onclick="send()">Send</button>
+  </div>
+
+  <script src="../sdk/wanwu-live-sdk.js"></script>
+  <script>
+    const sdk = new WanwuLiveSDK({
+      serverUrl: "ws://localhost:9300"
+    });
+
+    sdk.connect();
+
+    function join() {
+      const room = document.getElementById("room").value;
+      const user = document.getElementById("user").value;
+      sdk.joinRoom(room, user);
+    }
+
+    function send() {
+      const msg = document.getElementById("msg").value;
+      sdk.sendMessage(msg);
+    }
+
+    function leave() {
+      sdk.leaveRoom();
+    }
+  </script>
+</body>
+</html>
